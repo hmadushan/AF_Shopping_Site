@@ -12,6 +12,7 @@ router.route('/add').post((req, res) => {
     const username = req.body.username;
     const content = req.body.content;
     const productid = req.body.productid;
+    const rate = req.body.rate;
     const date = req.body.date;
   
     const newComment = new Comment({
