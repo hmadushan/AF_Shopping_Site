@@ -8,7 +8,7 @@ export default class Addcomment extends Component {
         super(props)
         this.state={
             
-            username: 'sat',
+            username: 'harsha',
             content:'',
             product:'1',
             Comments:[],   
@@ -41,7 +41,7 @@ export default class Addcomment extends Component {
             
           };
         console.log(Comments);
-        //connect back end front end using axios
+
         axios.post(' http://localhost:5001/comments/add', Comments)
         .then(res => console.log(res.data))
         .catch(err=>console.log("error in create comment"+err)
@@ -69,11 +69,11 @@ export default class Addcomment extends Component {
                  <input type="text" class="form-control" placeholder="Comment.." value={this.state.content} onChange={this.handleCommets} aria-label="Username" aria-describedby="basic-addon1"/>
 
                  <button type="button" class="btn btn-primary" onClick={()=>{this.onSubmit()}}>Comments submit</button>
-                   <li>
+                   <ul class="list-group">
                       {this.state.Comments.map(comment=>{
-                          return <ul style={comment.productid==1?{display:"block"}:{display:"none"},CommentStyle}>{comment.content} <span >{comment.date}></span> <span><button onClick={()=>{this.deleteExercise(comment._id)}} class="btn btn-outline-danger">Dlete</button></span> </ul>
+                          return <li class="list-group-item" style={comment.productid==1?{display:"block"}:{display:"none"},CommentStyle}>{comment.content+" "} <span >{new Date(comment.date).toLocaleString()} </span> <span><button onClick={()=>{this.deleteExercise(comment._id)}} class="btn btn-outline-danger">Dlete</button></span> </li>
                       })}
-                   </li>
+                   </ul>
 
             </div>
         )

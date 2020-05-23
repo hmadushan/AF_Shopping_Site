@@ -26,9 +26,6 @@ export default class RatingAdd extends Component {
     .then(res=>{
         console.log("get rating");
          console.log(res.data)
-        // this.setState({
-        //     getrating:res.data[0].rating
-        // })
         this.setState({
             rating:res.data[0].rating
         })
@@ -54,7 +51,7 @@ export default class RatingAdd extends Component {
         const rating={
 
             rating:this.state.rating,
-            username:'sat',
+            username:'harsha',
             productid:'1'
 
         }
