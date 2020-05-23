@@ -7,7 +7,7 @@ router.route('/').get((req,  res) => {
          .catch(err => res.status(400).json('Error:' + err));
 }); 
 
-router.route('/add').post((req, res) => {
+router.route('/add').put((req, res) => {
   const username = req.body.username;
   const rating = req.body.rating;
   const productid = req.body.productid;
@@ -18,14 +18,28 @@ router.route('/add').post((req, res) => {
      productid,
   });
 
-   newRating.save()
-        .then(() => res.json('Rating added!'))
-        .catch(err => res.status(400).json('Error: ' + err));            
+  console.log(newRating);
+  
+
+  Rating.update({ "productid" : productid }, 
+                {
+                             "productid":productid,
+                              "rating":rating,
+                              "username":username
+                  } ,{ upsert : true }).then(()=> res.json('rating add'))
+                  .catch(err => res.status(400).json("rating not update" + err));
+                  
+
+
+
+  //  newRating.save()
+  //       .then(() => res.json('Rating added!'))
+  //       .catch(err => res.status(400).json('Error: ' + err));            
 });
 
 router.route('/:id').get((req, res) => {
-   Rating.findById(req.params.id)
-     .then(Rating => res.json(Rating))
+   Rating.find( {"productid":req.params.id})
+     .then((rating)=> res.json(rating))
      .catch(err => res.status(400).json('Error: ' + err));
  });
 
